@@ -10,7 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap"
         rel="stylesheet">
     <!-- Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
@@ -41,7 +43,7 @@
             <div class="inputs">
                 <div class="input-group">
                     <label" for="">Departure</label>
-                    <input class="inp-style" type="date" name="">
+                        <input class="inp-style" type="date" name="">
                 </div>
                 <div class="input-group">
                     <label for="">Return</label>
@@ -51,20 +53,32 @@
             <div class="input-group f-class">
                 <div>
                     <label for="">First Class ($150)</label>
-                    <input class="inp-style inp-width" type="number" name="">
+                    <input id="first-ticket" class="inp-style inp-width" value="0" type="number" name="">
                 </div>
                 <div class="plus-minus-btn">
-                    <p>+ -</p>
+                    <button onclick=" ticketQuantityHandler('first' , false)" class="btn btn-default"><i
+                            class="fas fa-minus"></i></button>
+                    <button onclick=" ticketQuantityHandler('first' ,true)" class="btn btn-default"><i
+                            class="fas fa-plus"></i></button>
+
+                    <!-- <button id="firstClassDecrease" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                    <button id="firstClassIncrease" class="btn btn-default"><i class="fas fa-plus"></i></button> -->
                 </div>
             </div>
-            
+
             <div class="input-group f-class">
                 <div>
                     <label for="">Economy ($100)</label>
-                    <input class="inp-style inp-width" type="number" name="">
+                    <input id="economy-ticket" class="inp-style inp-width" value="0" type="number" name="">
                 </div>
                 <div class="plus-minus-btn">
-                    <p> <span>+</span> <span>-</span> </p>
+                    <button onclick=" ticketQuantityHandler('economy', false)" class="btn btn-default"><i
+                            class="fas fa-minus"></i></button>
+                    <button onclick=" ticketQuantityHandler('economy' ,true)" class="btn btn-default"><i
+                            class="fas fa-plus"></i></button>
+
+                    <!-- <button id="economyDecrease" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                    <button id="economyIncrease" class="btn btn-default"><i class="fas fa-plus"></i></button> -->
                 </div>
             </div>
             <div class="calculations">
@@ -73,7 +87,9 @@
                         <p>Subtotal</p>
                     </div>
                     <div class="right">
-                        <p>$500</p>
+                        <p>$
+                            <span id="subtotal">00</span>
+                        </p>
                     </div>
                 </div>
 
@@ -82,7 +98,7 @@
                         <p>Charge 10% VAT</p>
                     </div>
                     <div class="right">
-                        <p>$50</p>
+                        <p>$ <span id="taxArea"> 00</span> </p>
                     </div>
                 </div>
                 <hr>
@@ -91,7 +107,7 @@
                         <h4>Total</h4>
                     </div>
                     <div class="right">
-                        <p>$550</p>
+                        <p>$ <span id="totalAmount"> 00</span></p>
                     </div>
                 </div>
             </div>
@@ -100,11 +116,52 @@
 
         <div class="booking-content">
             <h1>discover <br> around the world</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicingelit. Provident voluptatibus quam fuga laborumalias veniam libero autem quasi maxime ullam vero nama imi dolor, architecto ab facilis eaque deserunt nobise voluptatibus quam</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicingelit. Provident voluptatibus quam fuga laborumalias
+                veniam libero autem quasi maxime ullam vero nama imi dolor, architecto ab facilis eaque deserunt nobise
+                voluptatibus quam</p>
         </div>
-    </section>
+        </section>
 
-    <!--Thank You-->
+        <!--Thank You-->
+
+        <script>
+
+            function ticketQuantityHandler(product, isIncrease) {
+                const productInput = document.getElementById (product + '-ticket');
+                const productCount = parseInt(productInput.value);
+                let productNewCount = productCount;
+                if (isIncrease == true) {
+                    productNewCount = productCount + 1;
+                }
+                if (isIncrease == false && productCount > 0) {
+                    productNewCount = productCount - 1;
+                }
+                productInput.value = productNewCount;
+
+                calculateSubtotal ();
+
+            }
+
+            function calculateSubtotal (){
+                const firstTicket =document.getElementById('first-ticket');
+                const  firstTicketCount =parseInt(firstTicket.value);
+
+                const economyTicket =document.getElementById('economy-ticket');
+                const economyTicketCount =parseInt(economyTicket.value);
+
+                const subtotal = firstTicketCount * 150 + economyTicketCount * 100 ;
+                document.getElementById('subtotal').innerText = subtotal;
+
+                const tax = subtotal * 0.1;
+                document.getElementById('taxArea').innerText =tax ;
+
+                const totalCost = subtotal + tax;
+                document.getElementById('totalAmount').innerText = totalCost ;
+            }
+
+           
+
+        </script>
 </body>
 
 </html>
