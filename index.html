@@ -30,7 +30,7 @@
 
     <!--Booking Section-->
     <main class="main-content container">
-        <div class="booking-form">
+        <div id ='bookingForm' class="booking-form">
             <h3>Booking Flights</h3>
             <div class="input-group">
                 <label for="">Flying From</label>
@@ -61,8 +61,6 @@
                     <button onclick=" ticketQuantityHandler('first' ,true)" class="btn btn-default"><i
                             class="fas fa-plus"></i></button>
 
-                    <!-- <button id="firstClassDecrease" class="btn btn-default"><i class="fas fa-minus"></i></button>
-                    <button id="firstClassIncrease" class="btn btn-default"><i class="fas fa-plus"></i></button> -->
                 </div>
             </div>
 
@@ -77,8 +75,6 @@
                     <button onclick=" ticketQuantityHandler('economy' ,true)" class="btn btn-default"><i
                             class="fas fa-plus"></i></button>
 
-                    <!-- <button id="economyDecrease" class="btn btn-default"><i class="fas fa-minus"></i></button>
-                    <button id="economyIncrease" class="btn btn-default"><i class="fas fa-plus"></i></button> -->
                 </div>
             </div>
             <div class="calculations">
@@ -111,7 +107,7 @@
                     </div>
                 </div>
             </div>
-            <button class="btn-style">Book Now</button>
+            <button id="bookNowBtn" class="btn-style">Book Now</button>
         </div>
 
         <div class="booking-content">
@@ -122,6 +118,13 @@
         </div>
         </section>
 
+        <div id="confirmArea">
+             
+             <h1 ><span class="success">Successfully</span> you are booking complete</h1>
+            <h2 class="wishMassage">Have a nice journey!</h2>
+        </div>
+            
+   
         <!--Thank You-->
 
         <script>
@@ -157,8 +160,18 @@
 
                 const totalCost = subtotal + tax;
                 document.getElementById('totalAmount').innerText = totalCost ;
+
             }
 
+            
+            const bookNowBtn =document.getElementById('bookNowBtn');
+            bookNowBtn.addEventListener('click',function(){
+                const bookingForm =document.getElementById('bookingForm');
+                bookingForm.style.display = 'none';
+
+                const confirmArea =document.getElementById('confirmArea');
+                confirmArea.style.display ='block';
+            })
            
 
         </script>
